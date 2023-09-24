@@ -623,7 +623,7 @@ end))
 local instakillinfectbutton = Instance.new("TextButton")
 instakillinfectbutton.Size = UDim2.new(.2,0,.2,0)
 instakillinfectbutton.Position = UDim2.new(.1,0,.45,0)
-instakillinfectbutton.Text = "Instant Kill When Infecting: OFF"
+instakillinfectbutton.Text = "Instant Kill When Infecting (KILLS YOU ALSO): OFF"
 instakillinfectbutton.TextScaled = true
 instakillinfectbutton.TextColor3 = Color3.fromRGB(255,255,255)
 instakillinfectbutton.BackgroundColor3 = Color3.fromRGB(50,50,50)
@@ -633,51 +633,26 @@ table.insert(tableofconnections,instakillinfectbutton.MouseButton1Click:Connect(
     instakillinfect = not instakillinfect
     if instakillinfect then
         instakillinfectbutton.Text = "Instant Kill When Infecting: ON"
-        game.Players.LocalPlayer.Character.HumanoidRootPart.InfectingAttachment.CFrame = CFrame.new(0,-1000,0)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 999999999999999999999999
     else
         instakillinfectbutton.Text = "Instant Kill When Infecting: OFF"
-        game.Players.LocalPlayer.Character.HumanoidRootPart.InfectingAttachment.CFrame = CFrame.new(0, 0, -0.5, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
     end
 end))
 
 function logchar(char)
     if char.Name == game.Players.LocalPlayer.Name then
         print("char is plr")
+        char:WaitForChild("Humanoid",math.huge)
         char:WaitForChild("HumanoidRootPart",math.huge)
-        char.HumanoidRootPart:WaitForChild("InfectingAttachment",math.huge)
-        char.HumanoidRootPart.InfectingAttachment.CFrame = CFrame.new(0,-1000,0)
-        table.insert(tableofconnections,char.HumanoidRootPart.InfectingAttachment:GetPropertyChangedSignal("CFrame"):Connect(function()
-            if instakillinfect and char.HumanoidRootPart.InfectingAttachment.CFrame == CFrame.new(0, 0, -0.5, 1, 0, 0, 0, 1, 0, 0, 0, 1) then
-                print("infectingatt changed")
-                char.HumanoidRootPart.InfectingAttachment.CFrame = CFrame.new(0,-math.huge,0)
-            end
-        end))
         table.insert(tableofconnections,char.HumanoidRootPart.ChildAdded:Connect(function(v)
             if instakillinfect then
                 if v:IsA("AlignPosition") then
-                    print("alignpos made")
-                    v.MaxForce = 100000000
-                    v.Responsiveness = 1000
-                    v.Visible = true
-                    table.insert(tableofconnections,v:GetPropertyChangedSignal("MaxForce"):Connect(function()
-                        if v.MaxForce ~= 100000000 then
-                            print("force change")
-                            v.MaxForce = 100000000
-                            v.Responsiveness = 1000
-                            v.Visible = true
-                        end
-                    end))
-                    table.insert(tableofconnections,v:GetPropertyChangedSignal("Responsiveness"):Connect(function()
-                        if v.Responsiveness ~= 1000 and v.Responsiveness ~= 100 then
-                            print("responsive change")
-                            v.MaxForce = 100000000
-                            v.Responsiveness = 1000
-                            v.Visible = true
-                        end
-                    end))
-                elseif v:IsA("AlignOrientation") then
-                    print("alignorientation, disabling")
-                    v.Enabled = false
+                    char.Humanoid.JumpPower = 999999999999999999999999
+                    repeat
+                        wait()
+                        char.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+                    until not char.Humanoid or char.Humanoid.Health <= 0
                 end
             end
         end))
