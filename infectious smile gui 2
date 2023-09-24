@@ -30,7 +30,7 @@ function correctpart(part)
     if not part:IsA("BasePart") then return nil end
     if ((part.Parent.Name == "Infector" or part.Parent.Name == "Infector 2.0" or part.Parent.Name == "Infector(You can reposition, reclone, or resize the camera or the white infection area") or (part.Color == Color3.fromRGB(248,248,248) and part.Material == Enum.Material.Neon)) and (part:FindFirstChild("InfectScript") or part:FindFirstChild("camera")) then
         return "inf"
-    elseif (part.Color == Color3.fromRGB(213, 115, 61) or (part.Name == "Void" and part.Color == Color3.fromRGB(0,0,0)) or (part.Color == Color3.fromRGB(0,0,0) and part.Parent == workspace.Map.ConstantTerrain) or part:FindFirstChild("KillAll") or part.Name == "SawKill" or ((part.Color == Color3.fromRGB(255,0,0) and part.Name ~= "Button" and part.Parent.Name ~= "ButtonSystem" and not part.Parent:FindFirstChild("Spotlights")) and part.Name == "Laser") or part.Parent:FindFirstChild("Human")) or (part.Name == "Lava" or part.Name == "SewageWater" or part.Name == "Water" or part.Name == "WaterBottom" or part.Name == "Weight" or part.Name:lower() == "killpart" or part.Name:lower() == "killbrick" or part.Name == "KillRegion" or part.Name:lower() == "killall" or part.Name == "KillZone" or part.Name == "Spearhead" or part:FindFirstChild("FreezeScript") or (part.Parent.Name == "Spinners" and (part.Color == Color3.fromRGB(255,255,0) or part.Color == Color3.fromRGB(255,89,89)))) then
+    elseif (part.Color == Color3.fromRGB(213, 115, 61) or (part.Name == "Void" and part.Color == Color3.fromRGB(0,0,0)) or (part.Color == Color3.fromRGB(0,0,0) and part.Parent == workspace.Map.ConstantTerrain) or part.Name == "SmilerKillBrick" or part:FindFirstChild("KillAll") or part.Name == "SawKill" or ((part.Color == Color3.fromRGB(255,0,0) and part.Name ~= "Button" and part.Parent.Name ~= "ButtonSystem" and not part.Parent:FindFirstChild("Spotlights")) and part.Name == "Laser") or part.Parent:FindFirstChild("Human")) or (part.Name == "Lava" or part.Name == "SewageWater" or part.Name == "Water" or part.Name == "WaterBottom" or part.Name == "Weight" or part.Name:lower() == "killpart" or part.Name:lower() == "killbrick" or part.Name == "KillRegion" or part.Name:lower() == "killall" or part.Name == "KillZone" or part.Name == "Spearhead" or part:FindFirstChild("FreezeScript") or (part.Parent.Name == "Spinners" and (part.Color == Color3.fromRGB(255,255,0) or part.Color == Color3.fromRGB(255,89,89)))) then
         return "disinf"
     elseif (part:FindFirstChild("ConvertToHuman") and part:FindFirstChild("TouchInterest")) then
         return "sad"
@@ -632,10 +632,9 @@ instakillinfectbutton.Parent = extrasection
 table.insert(tableofconnections,instakillinfectbutton.MouseButton1Click:Connect(function()
     instakillinfect = not instakillinfect
     if instakillinfect then
-        instakillinfectbutton.Text = "Instant Kill When Infecting: ON"
-        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 999999999999999999999999
+        instakillinfectbutton.Text = "Instant Kill When Infecting (KILLS YOU ALSO): ON"
     else
-        instakillinfectbutton.Text = "Instant Kill When Infecting: OFF"
+        instakillinfectbutton.Text = "Instant Kill When Infecting (KILLS YOU ALSO): OFF"
         game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
     end
 end))
@@ -652,7 +651,12 @@ function logchar(char)
                     repeat
                         wait()
                         char.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-                    until not char.Humanoid or char.Humanoid.Health <= 0
+                        char.Humanoid.JumpPower = 999999999999999999999999
+                        char.Humanoid.PlatformStand = false
+                    until not v or char.Humanoid or char.Humanoid.Health <= 0
+                    if not v then
+                        char.Humanoid.JumpPower = 50
+                    end
                 end
             end
         end))
