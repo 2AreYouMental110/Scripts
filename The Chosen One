@@ -20,6 +20,8 @@ Anti-blind
 Anti-stun
 Anti-invis
 Anti-toxify
+Anti-blur
+Anti-nocolor (idk what it is)
 
 It will still say stuff when muted, but if you want to actually talk while muted, use infinite yield's "chat command"
 
@@ -58,7 +60,7 @@ function getadmin()
         for i,v in pairs(workspace:GetChildren()) do
             if found then
                 continue
-            elseif v.Name == "The Arkenstone" and v:FindFirstChild("TouchInterest") then
+            elseif v.Name == "The Arkenstone" and v.Handle:FindFirstChild("TouchInterest") then
                 found = v
             end
         end
@@ -68,7 +70,7 @@ function getadmin()
                     wait()
                     found.Handle.CFrame = localplr.Character.HumanoidRootPart.CFrame
                     found.Handle.ForceField.CFrame = localplr.Character.HumanoidRootPart.CFrame
-                until not found or localplr.Character:FindFirstChild("The Arkenstone")
+                until not found or not found:FindFirstChild("Handle") or localplr.Character:FindFirstChild("The Arkenstone")
                 return true
             end)
         end
@@ -241,18 +243,12 @@ end
 
 table.insert(connect1,workspace.Cubes.DescendantAdded:Connect(function(cube)
     if cube:IsA("Part") then
-        local light = cube:FindFirstChildWhichIsA("PointLight")
-        if light then
-            cube.CanTouch = false
-        end
+        cube.CanTouch = false
     end
 end))
 for i,cube in pairs(workspace.Cubes:GetDescendants()) do
     if cube:IsA("Part") then
-        local light = cube:FindFirstChildWhichIsA("PointLight")
-        if light then
-            cube.CanTouch = false
-        end
+        cube.CanTouch = false
     end
 end
 
@@ -286,6 +282,8 @@ task.spawn(function()
             if localplr.PlayerGui:FindFirstChild("BlindGUI") then
                 localplr.PlayerGui.BlindGUI.Enabled = false
             end
+            game.Lighting.Blur.Enabled = false
+            game.Lighting.RGB.Enabled = false
             if localplr.Character:FindFirstChild("HumanoidRootPart") and (localplr.Character.HumanoidRootPart.Position.Y >= 100000 or localplr.Character.HumanoidRootPart.Position.X >= 10000 or localplr.Character.HumanoidRootPart.Position.X <= -10000 or localplr.Character.HumanoidRootPart.Position.Z >= 10000 or localplr.Character.HumanoidRootPart.Position.Z <= -10000) then
                 localplr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.new(0,0,0)
                 localplr.Character:PivotTo(CFrame.new(0,200,0))
