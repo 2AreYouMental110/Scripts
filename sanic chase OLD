@@ -1,0 +1,336 @@
+getgenv().autokillt = false
+getgenv().placeholder1 = false
+getgenv().autoopenandclose = false
+
+local selectedoption
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Sanic Chase", "Sentinel")
+ 
+local M = Window:NewTab("Main")
+local M1 = M:NewSection("Main")
+
+local A = Window:NewTab("Infection")
+local A1 = A:NewSection("Sanic")
+local A2 = A:NewSection("Human")
+local A3 = A:NewSection("Other")
+ 
+A1:NewDropdown("select which sanic to become", "ok so super sanic, majin or normal", {"super", "majin", "normal"}, function(value1)
+    selectedoption = value1
+    print(value1)
+end)
+ 
+A1:NewButton("become what sanic", "super sanic teleports you", function()
+    if selectedoption == "super" then
+        local player = game.Players.LocalPlayer.Character.HumanoidRootPart
+        for i, v in pairs(game:GetService("Workspace").GameFolder.InfectionPart.Strong.TransfurPart:GetDescendants()) do
+            if v.Name == "TouchInterest" and v.Parent.Name == "TransfurPart" then
+                firetouchinterest(player, v.Parent, 0)
+                wait()
+                firetouchinterest(player, v.Parent, 1)
+                wait()
+            end
+        end
+    end
+    if selectedoption == "majin" then
+        local player = game.Players.LocalPlayer.Character.HumanoidRootPart
+        for i, v in pairs(game:GetService("Workspace").GameFolder.InfectionPart.Medium.TransfurPart:GetDescendants()) do
+            if v.Name == "TouchInterest" and v.Parent.Name == "TransfurPart" then
+                firetouchinterest(player, v.Parent, 0)
+                wait()
+                firetouchinterest(player, v.Parent, 1)
+                wait()
+            end
+        end
+    end
+    if selectedoption == "normal" then
+        local player = game.Players.LocalPlayer.Character.HumanoidRootPart
+        for i, v in pairs(game:GetService("Workspace").GameFolder.InfectionPart.Weak.TransfurPart:GetDescendants()) do
+            if v.Name == "TouchInterest" and v.Parent.Name == "TransfurPart" then
+                firetouchinterest(player, v.Parent, 0)
+                wait()
+                firetouchinterest(player, v.Parent, 1)
+                wait()
+            end
+        end
+    end
+end)
+
+A1:NewButton("sanic killfields dont kill!!", "(permanent!!)", function()
+    for i, v in pairs(game:GetService("Workspace").GameFolder.KillFields:GetDescendants()) do
+        if v.Name == "Field" and v.Parent.Name == "KillField" then
+            local parent = v.Parent
+            local name = "FieldFake"
+            local material = v.Material
+            local shape = v.Shape
+            local size = v.Size
+            local transparency = v.Transparency
+            local color = v.Color
+            local cframe = v.CFrame
+            local part = Instance.new("Part")
+            part.Parent = parent
+            part.Name = name
+            part.Material = material
+            part.Shape = shape
+            part.Size = size
+            part.Transparency = transparency
+            part.Color = color
+            part.CFrame = cframe
+            part.Anchored = true
+            part.CanCollide = false
+            v.CFrame = CFrame.new(69420, 69420, 69420)
+        end
+    end
+end)
+A1:NewButton("sanic campbarriers dont poison!!", "(permanent!!)", function()
+    for i, v in pairs(game:GetService("Workspace"):GetDescendants()) do
+        if v.Name == "CampBarrier" and v.Parent.Name == "Workspace" then
+            local parent = v.Parent
+            local name = "CampBarrierFake"
+            local material = v.Material
+            local shape = v.Shape
+            local size = v.Size
+            local transparency = v.Transparency
+            local color = v.Color
+            local cframe = v.CFrame
+            local part = Instance.new("Part")
+            part.Parent = parent
+            part.Name = name
+            part.Material = material
+            part.Shape = shape
+            part.Size = size
+            part.Transparency = (0.5)
+            part.Color = color
+            part.CFrame = cframe
+            part.Anchored = true
+            part.CanCollide = false
+            v.CFrame = CFrame.new(69420, 69420, 69420)
+        end
+    end
+end)
+A1:NewButton("obby doesnt disappear!!", "(permanent!!)", function()
+    for i, v in pairs(game:GetService("Workspace").GameFolder.ObbyEnter:GetDescendants()) do
+        if v.Name == "TouchInterest" and v.Parent.Parent.Name == "ObbyEnter" then
+            local parent = v.Parent.Parent
+            local name = "ObbyPartFake"
+            local material = v.Parent.Material
+            local shape = v.Parent.Shape
+            local size = v.Parent.Size
+            local transparency = v.Parent.Transparency
+            local color = v.Parent.Color
+            local cframe = v.Parent.CFrame
+            local part = Instance.new("Part")
+            part.Parent = parent
+            part.Name = name
+            part.Material = material
+            part.Shape = shape
+            part.Size = size
+            part.Transparency = transparency
+            part.Color = color
+            part.CFrame = cframe
+            part.Anchored = true
+            part.CanCollide = true
+            v.Parent.CFrame = CFrame.new(69420, 69420, 69420)
+        end
+    end
+end)
+
+A1:NewButton("big hitbox (buggy)", "(buggy!!)", function()
+    m = game:GetService("Workspace").CampBarrier.Size
+    game.Players.LocalPlayer.Character.Humanoid.HipHeight = -7
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Size = m
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Transparency = 0
+end)
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    local p22a0 = 1
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    local p22a1 = 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if p22a0 == p22a1 then
+    loadstring("\103\101\116\103\101\110\118\40\41\46\97\117\116\111\107\105\108\108\116\32\61\32\102\97\108\115\101\10\103\101\116\103\101\110\118\40\41\46\97\117\116\111\116\112\116\32\61\32\102\97\108\115\101\10\10\108\111\99\97\108\32\76\105\98\114\97\114\121\32\61\32\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\34\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\120\72\101\112\116\99\47\75\97\118\111\45\85\73\45\76\105\98\114\97\114\121\47\109\97\105\110\47\115\111\117\114\99\101\46\108\117\97\34\41\41\40\41\10\108\111\99\97\108\32\87\105\110\100\111\119\32\61\32\76\105\98\114\97\114\121\46\67\114\101\97\116\101\76\105\98\40\34\83\97\110\105\99\32\67\104\97\115\101\34\44\32\34\83\101\110\116\105\110\101\108\34\41\10\32\10\108\111\99\97\108\32\77\32\61\32\87\105\110\100\111\119\58\78\101\119\84\97\98\40\34\77\97\105\110\34\41\10\108\111\99\97\108\32\77\49\32\61\32\77\58\78\101\119\83\101\99\116\105\111\110\40\34\77\97\105\110\34\41\10\10\10\77\49\58\78\101\119\84\111\103\103\108\101\40\34\97\117\116\111\107\105\108\108\34\44\32\34\97\117\116\111\108\97\103\34\44\32\102\117\110\99\116\105\111\110\40\98\111\111\108\41\10\32\32\32\32\103\101\116\103\101\110\118\40\41\46\97\117\116\111\107\105\108\108\116\32\61\32\98\111\111\108\10\32\32\32\32\105\102\32\98\111\111\108\32\61\61\32\116\114\117\101\32\116\104\101\110\10\32\32\32\32\32\32\32\32\97\117\116\111\107\105\108\108\40\41\10\32\32\32\32\101\110\100\10\32\32\32\32\105\102\32\98\111\111\108\32\61\61\32\102\97\108\115\101\32\116\104\101\110\10\32\32\32\32\32\32\32\32\103\97\109\101\46\80\108\97\121\101\114\115\46\76\111\99\97\108\80\108\97\121\101\114\46\67\104\97\114\97\99\116\101\114\46\72\117\109\97\110\111\105\100\82\111\111\116\80\97\114\116\46\83\105\122\101\32\61\32\86\101\99\116\111\114\51\46\110\101\119\40\34\50\34\44\34\50\34\44\34\49\34\41\10\32\32\32\32\32\32\32\32\103\97\109\101\46\80\108\97\121\101\114\115\46\76\111\99\97\108\80\108\97\121\101\114\46\67\104\97\114\97\99\116\101\114\46\72\117\109\97\110\111\105\100\46\72\105\112\72\101\105\103\104\116\32\61\32\40\48\41\10\32\32\32\32\101\110\100\10\101\110\100\41\10\10\77\49\58\78\101\119\84\111\103\103\108\101\40\34\97\117\116\111\116\112\34\44\32\34\97\117\116\111\108\97\103\34\44\32\102\117\110\99\116\105\111\110\40\98\111\111\108\41\10\32\32\32\32\103\101\116\103\101\110\118\40\41\46\97\117\116\111\116\112\116\32\61\32\98\111\111\108\10\32\32\32\32\105\102\32\98\111\111\108\32\61\61\32\116\114\117\101\32\116\104\101\110\10\32\32\32\32\32\32\32\32\97\117\116\111\116\112\40\41\10\32\32\32\32\101\110\100\10\101\110\100\41\10\10\102\117\110\99\116\105\111\110\32\97\117\116\111\116\112\40\41\10\32\32\32\32\115\112\97\119\110\40\102\117\110\99\116\105\111\110\40\41\10\32\32\32\32\32\32\32\32\119\104\105\108\101\32\103\101\116\103\101\110\118\40\41\46\97\117\116\111\116\112\116\32\100\111\10\32\32\32\32\32\32\32\32\32\32\32\32\102\111\114\32\105\44\32\112\32\105\110\32\105\112\97\105\114\115\40\103\97\109\101\46\80\108\97\121\101\114\115\58\71\101\116\80\108\97\121\101\114\115\40\41\41\32\100\111\10\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\112\46\67\104\97\114\97\99\116\101\114\46\72\117\109\97\110\111\105\100\82\111\111\116\80\97\114\116\46\67\70\114\97\109\101\32\61\32\103\97\109\101\46\80\108\97\121\101\114\115\46\76\111\99\97\108\80\108\97\121\101\114\46\67\104\97\114\97\99\116\101\114\46\72\117\109\97\110\111\105\100\82\111\111\116\80\97\114\116\46\67\70\114\97\109\101\10\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\119\97\105\116\40\41\10\32\32\32\32\32\32\32\32\32\32\32\32\101\110\100\10\32\32\32\32\32\32\32\32\101\110\100\10\32\32\32\32\101\110\100\41\10\101\110\100\10\10\102\117\110\99\116\105\111\110\32\97\117\116\111\107\105\108\108\40\41\10\32\32\32\32\115\112\97\119\110\40\102\117\110\99\116\105\111\110\40\41\10\32\32\32\32\32\32\32\32\119\104\105\108\101\32\103\101\116\103\101\110\118\40\41\46\97\117\116\111\107\105\108\108\116\32\100\111\10\32\32\32\32\32\32\32\32\32\32\32\32\103\97\109\101\46\80\108\97\121\101\114\115\46\76\111\99\97\108\80\108\97\121\101\114\46\67\104\97\114\97\99\116\101\114\46\72\117\109\97\110\111\105\100\82\111\111\116\80\97\114\116\46\83\105\122\101\32\61\32\86\101\99\116\111\114\51\46\110\101\119\40\34\49\48\48\48\48\34\44\34\53\34\44\34\49\48\48\48\48\34\41\10\32\32\32\32\32\32\32\32\32\32\32\32\103\97\109\101\46\80\108\97\121\101\114\115\46\76\111\99\97\108\80\108\97\121\101\114\46\67\104\97\114\97\99\116\101\114\46\72\117\109\97\110\111\105\100\82\111\111\116\80\97\114\116\46\84\114\97\110\115\112\97\114\101\110\99\121\32\61\32\40\48\46\53\41\10\32\32\32\32\32\32\32\32\32\32\32\32\103\97\109\101\46\80\108\97\121\101\114\115\46\76\111\99\97\108\80\108\97\121\101\114\46\67\104\97\114\97\99\116\101\114\46\72\117\109\97\110\111\105\100\46\72\105\112\72\101\105\103\104\116\32\61\32\40\48\41\10\32\32\32\32\32\32\32\32\32\32\32\32\119\97\105\116\40\48\46\49\41\10\32\32\32\32\32\32\32\32\32\32\32\32\103\97\109\101\46\80\108\97\121\101\114\115\46\76\111\99\97\108\80\108\97\121\101\114\46\67\104\97\114\97\99\116\101\114\46\72\117\109\97\110\111\105\100\82\111\111\116\80\97\114\116\46\83\105\122\101\32\61\32\86\101\99\116\111\114\51\46\110\101\119\40\34\49\48\48\48\48\34\44\34\51\34\44\34\49\48\48\48\48\34\41\10\32\32\32\32\32\32\32\32\32\32\32\32\103\97\109\101\46\80\108\97\121\101\114\115\46\76\111\99\97\108\80\108\97\121\101\114\46\67\104\97\114\97\99\116\101\114\46\72\117\109\97\110\111\105\100\46\72\105\112\72\101\105\103\104\116\32\61\32\40\50\41\10\32\32\32\32\32\32\32\32\32\32\32\32\119\97\105\116\40\48\46\49\41\10\32\32\32\32\32\32\32\32\32\32\32\32\103\97\109\101\46\80\108\97\121\101\114\115\46\76\111\99\97\108\80\108\97\121\101\114\46\67\104\97\114\97\99\116\101\114\46\72\117\109\97\110\111\105\100\82\111\111\116\80\97\114\116\46\83\105\122\101\32\61\32\86\101\99\116\111\114\51\46\110\101\119\40\34\49\48\48\48\48\34\44\34\52\34\44\34\49\48\48\48\48\34\41\10\32\32\32\32\32\32\32\32\32\32\32\32\103\97\109\101\46\80\108\97\121\101\114\115\46\76\111\99\97\108\80\108\97\121\101\114\46\67\104\97\114\97\99\116\101\114\46\72\117\109\97\110\111\105\100\46\72\105\112\72\101\105\103\104\116\32\61\32\40\49\41\10\32\32\32\32\32\32\32\32\101\110\100\10\32\32\32\32\101\110\100\41\10\101\110\100\10\10")()
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+A2:NewButton("sanic puddles dont infect!!", "(permanent!!)", function()
+    for i, v in pairs(game:GetService("Workspace").GameFolder.InfectionPart:GetDescendants()) do
+        if v.Name == "TransfurPart" and v.Parent.Parent.Name == "InfectionPart" then
+            local parent = v.Parent.Parent
+            local name = "TransfurPartFake"
+            local material = v.Material
+            local shape = v.Shape
+            local size = v.Size
+            local transparency = v.Transparency
+            local color = v.Color
+            local cframe = v.CFrame
+            local part = Instance.new("Part")
+            part.Parent = parent
+            part.Name = name
+            part.Material = material
+            part.Shape = shape
+            part.Size = size
+            part.Transparency = (0.5)
+            part.Color = color
+            part.CFrame = cframe
+            part.Anchored = true
+            part.CanCollide = false
+            v.CFrame = CFrame.new(69420, 69420, 69420)
+        end
+    end
+end)
+
+A2:NewButton("bear traps dont hit!! (buggy)", "(permanent!!)", function()
+    for i, v in pairs(game:GetService("Workspace"):GetDescendants()) do
+        if v.Name == "Captured" and v.Parent.Name == "BearTrap" then
+            local parent = v.Parent.Parent
+            local name = "BearTrapFake"
+            local material = v.Parent.Material
+            local size = v.Parent.Size
+            local transparency = v.Parent.Transparency
+            local color = v.Parent.Color
+            local cframe = v.Parent.CFrame
+            local meshid = v.Parent.MeshId
+            local part = Instance.new("MeshPart")
+            part.Parent = parent
+            part.Name = name
+            part.Material = material
+            part.Size = size
+            part.Transparency = (0)
+            part.Color = color
+            part.CFrame = cframe
+            part.MeshId = meshid
+            part.Anchored = true
+            part.CanCollide = false
+            v.Parent.Anchored = true
+            v.Parent.CFrame = CFrame.new(69420, 69420, 69420)
+        end
+    end
+end)
+
+A3:NewButton("play sounds", "(lasts long!!)", function()
+    for i, v in pairs(game:GetService("Workspace"):GetDescendants()) do
+        if v.ClassName == "Sound" then
+            v:Stop()
+            v.MaxDistance = math.huge
+            v.Looped = true
+            v:Play()
+            wait(0.5)
+            v.Looped = false
+        end
+    end
+end)
+
+A3:NewToggle("go through lobby shop barrier", "go through the shop barrier", function(bool)
+    if bool == true then
+        game:GetService("Workspace").GameFolder.Shops.LobbyShops.MainShop.Border.CanCollide = false
+        game:GetService("Workspace").GameFolder.Shops.LobbyShops.MainShop.Border.Transparency = (0.5)
+    end
+    if bool == false then
+        game:GetService("Workspace").GameFolder.Shops.LobbyShops.MainShop.Border.CanCollide = true
+        game:GetService("Workspace").GameFolder.Shops.LobbyShops.MainShop.Border.Transparency = (1)
+    end
+end)
+
+A3:NewToggle("show hitbox", "shows hitbox", function(bool)
+    if bool == true then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.Transparency = (0)
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Size = (fatsize)
+    end
+    if bool == false then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.Transparency = (1)
+    end
+end)
+
+
+A3:NewToggle("open/close doors", "opens and closes doors", function(bool)
+    getgenv().autoopenandclose = bool
+    if bool == true then
+        autoopen()
+    end
+    if bool == false then
+        autoclose()
+    end
+end)
+
+A3:NewKeybind("delete jumpcooldown", "deletes jumpcooldown", Enum.KeyCode.J, function()
+	game.Players.LocalPlayer.Character.JumpCooldown:Destroy()
+end)
+ 
+function autokill()
+    spawn(function()
+        while getgenv().autokillt do
+            game.Players.LocalPlayer.Character.HumanoidRootPart.Size = Vector3.new("10000","5","10000")
+            game.Players.LocalPlayer.Character.HumanoidRootPart.Transparency = (0.5)
+            game.Players.LocalPlayer.Character.Humanoid.HipHeight = (0)
+            wait(0.1)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.Size = Vector3.new("10000","3","10000")
+            game.Players.LocalPlayer.Character.Humanoid.HipHeight = (2)
+            wait(0.1)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.Size = Vector3.new("10000","4","10000")
+            game.Players.LocalPlayer.Character.Humanoid.HipHeight = (1)
+        end
+    end)
+end
+
+function autoopen()
+    spawn(function()
+        while getgenv().autoopent do
+            for i, v in pairs(game:GetService("Workspace").GameFolder.Map.Area51:GetDescendants()) do
+                if v.ClassName == "ClickDetector" and v.Parent.Name == "Open" then
+                    v.MaxActivationDistance = math.huge
+                    fireclickdetector(v)
+                    wait()
+                end
+            end
+        end
+    end)
+end
+
+function autoclose()
+    spawn(function()
+        while getgenv().autocloset do
+            for i, v in pairs(game:GetService("Workspace").GameFolder.Map.Area51:GetDescendants()) do
+                if v.ClassName == "ClickDetector" and v.Parent.Name == "Close" then
+                    v.MaxActivationDistance = math.huge
+                    fireclickdetector(v)
+                    wait()
+                end
+            end
+        end
+    end)
+end
+
+function placeholder1()
+    print("placeholder")
+    wait()
+end
+
+M1:NewKeybind("toggleui", "toggleui", Enum.KeyCode.RightControl, function()
+	Library:ToggleUI()
+end)
+
+
