@@ -64,7 +64,7 @@ lib.makebutton("Unlock Secret Ending",maintab,function()
     game.ReplicatedStorage.Events.LarryEndingEvent:FireServer("MaskCollected")
 end)
 
-lib.makebutton("Heal All",maintab,function()
+lib.makebutton("Heal All (don't spam or it'll break)",maintab,function()
     for i,v in pairs(localplr.Character:GetChildren()) do
         if v:IsA("Tool") then
             v.Parent = localplr.Backpack
@@ -74,6 +74,32 @@ lib.makebutton("Heal All",maintab,function()
     local apple = localplr.Backpack:WaitForChild("GoldenApple",math.huge)
     apple.Parent = localplr.Character
     game.ReplicatedStorage.Events.HealTheNoobs:FireServer()
+end)
+
+lib.makebutton("Get Dream Team",maintab,function()
+    -- uncle pete
+    for i,v in pairs(localplr.Character:GetChildren()) do
+        if v:IsA("Tool") then
+            v.Parent = localplr.Backpack
+        end
+    end
+    game.ReplicatedStorage.Events.GiveTool:FireServer("Key")
+    local key = localplr.Backpack:WaitForChild("Key",math.huge)
+    key.Parent = localplr.Character
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("KeyEvent"):FireServer()
+    -- twado
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("CatFed"):FireServer(game:GetService("Players").LocalPlayer.PlayerGui.Phone.Phone.Phone.Background.InfoScreen.DogInfo.TwadoWants.Text)
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("CatUpdate"):FireServer(CFrame.new(-196.73828125, 26.994741439819336, -790.2998657226562, 0.05909018963575363, 0, 0.9982526302337646, 0, 1, 0, -0.9982526302337646, 0, 0.05909018963575363))
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("GoingInside"):FireServer()
+    -- detective bradley
+    game.ReplicatedStorage.Events.GiveTool:FireServer("Louise")
+    local rat = localplr.Backpack:WaitForChild("Louise",math.huge)
+    rat.Parent = localplr.Character
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("LouiseGive"):FireServer(2)
+end)
+
+lib.makebutton("Avoid Humiliation Badge",maintab,function()
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AvoidHumiliation"):FireServer()
 end)
 
 lib.makelabel("Food",maintab)
