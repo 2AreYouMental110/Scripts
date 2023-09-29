@@ -64,6 +64,18 @@ lib.makebutton("Unlock Secret Ending",maintab,function()
     game.ReplicatedStorage.Events.LarryEndingEvent:FireServer("MaskCollected")
 end)
 
+lib.makebutton("Heal All",maintab,function()
+    for i,v in pairs(localplr.Character:GetChildren()) do
+        if v:IsA("Tool") then
+            v.Parent = localplr.Backpack
+        end
+    end
+    game.ReplicatedStorage.Events.GiveTool:FireServer("GoldenApple")
+    local apple = localplr.Backpack:WaitForChild("GoldenApple",math.huge)
+    apple.Parent = localplr.Character
+    game.ReplicatedStorage.Events.HealTheNoobs:FireServer()
+end)
+
 lib.makelabel("Food",maintab)
 local food = {"Apple","Cookie","Chips","Pizza","Lollipop","GoldenApple","GoldPizza","RainbowPizza","RainbowPizzaBox"}
 
