@@ -16,7 +16,7 @@ local notifyondisconnect = true -- notifies when you get disconnected
 webhook instructions:
 
 1. make a new server on discord
-2. go to server settings and press "Integrations"
+w2. go to server settings and press "Integrations"
 3. press "Create A Webhook"
 4. click on your webhook and press "Copy Webhook URL"
 5. paste the webhook url on webhookurl in this script settings
@@ -487,13 +487,10 @@ t1s2:NewToggle("autofarm stands", "toggles to autofarm or not", function(state)
             local arrow = "Stand Arrow"
             local roka = "Rokakaka"
             if localplr.Backpack:FindFirstChild(arrow) and plrstand.Value == "None" then
-                local selarrow = localplr.Backpack:FindFirstChild(arrow) or localplr.Character:FindFirstChild(arrow)
-                if not selarrow:FindFirstChild("Use") then
-                    return
-                end
                 selarrow.Parent = localplr.Character
-                selarrow.Use:FireServer()
-                repeat wait() until selarrow.Parent == nil
+                game.ReplicatedStorage.Events.UseItem:FireServer()
+                localplr.Data.Stand.Changed:Wait()
+                selarrow.Parent = localplr.Backpack
                 wait(0.2)
                 if specattfarm[plratt.Value] and specstandfarm[plrstand.Value] then
                     notif("!!!","hit perfect stand and attribute!")
@@ -510,12 +507,10 @@ t1s2:NewToggle("autofarm stands", "toggles to autofarm or not", function(state)
                 end
             elseif localplr.Backpack:FindFirstChild(roka) and plrstand.Value ~= "None" and not specstandfarm[plrstand.Value] and not specattfarm[plratt.Value] then
                 local selroka = localplr.Backpack:FindFirstChild(roka) or localplr.Character:FindFirstChild(roka)
-                if not selroka:FindFirstChild("Use") then
-                    return
-                end
                 selroka.Parent = localplr.Character
-                selroka.Use:FireServer()
-                repeat wait() until selroka.Parent == nil
+                game.ReplicatedStorage.Events.UseItem:FireServer()
+                localplr.Data.Stand.Changed:Wait()
+                selroka.Parent = localplr.Backpack
                 wait(0.2)
                 if plrstand.Value == "PutridWhine" then
                     notif("you got putrid whine","cool thing")
@@ -536,12 +531,10 @@ t1s2:NewToggle("autofarm stands (charged arrows)", "toggles to autofarm or not",
             local roka = "Rokakaka"
             if localplr.Backpack:FindFirstChild(arrow) and plrstand.Value == "None" then
                 local selarrow = localplr.Backpack:FindFirstChild(arrow) or localplr.Character:FindFirstChild(arrow)
-                if not selarrow:FindFirstChild("Use") then
-                    return
-                end
                 selarrow.Parent = localplr.Character
-                selarrow.Use:FireServer()
-                repeat wait() until selarrow.Parent == nil
+                game.ReplicatedStorage.Events.UseItem:FireServer()
+                localplr.Data.Stand.Changed:Wait()
+                selarrow.Parent = localplr.Backpack
                 wait(0.2)
                 if specattfarm[plratt.Value] and specstandfarm[plrstand.Value] then
                     notif("!!!","hit perfect stand and attribute!")
@@ -558,12 +551,10 @@ t1s2:NewToggle("autofarm stands (charged arrows)", "toggles to autofarm or not",
                 end
             elseif localplr.Backpack:FindFirstChild(roka) and plrstand.Value ~= "None" and not specstandfarm[plrstand.Value] and not specattfarm[plratt.Value] then
                 local selroka = localplr.Backpack:FindFirstChild(roka) or localplr.Character:FindFirstChild(roka)
-                if not selroka:FindFirstChild("Use") then
-                    return
-                end
                 selroka.Parent = localplr.Character
-                selroka.Use:FireServer()
-                repeat wait() until selroka.Parent == nil
+                game.ReplicatedStorage.Events.UseItem:FireServer()
+                localplr.Data.Stand.Changed:Wait()
+                selroka.Parent = localplr.Backpack
                 wait(0.2)
                 if plrstand.Value == "PutridWhine" then
                     notif("you got putrid whine","cool thing")
@@ -584,12 +575,10 @@ t1s2:NewToggle("autofarm stands (attributes)", "toggles to autofarm or not", fun
             local roka = "Rokakaka"
             if localplr.Backpack:FindFirstChild(arrow) and plrstand.Value == "None" then
                 local selarrow = localplr.Backpack:FindFirstChild(arrow) or localplr.Character:FindFirstChild(arrow)
-                if not selarrow:FindFirstChild("Use") then
-                    return
-                end
                 selarrow.Parent = localplr.Character
-                selarrow.Use:FireServer()
-                repeat wait() until selarrow.Parent == nil
+                game.ReplicatedStorage.Events.UseItem:FireServer()
+                localplr.Data.Stand.Changed:Wait()
+                selarrow.Parent = localplr.Backpack
                 wait(0.2)
                 if specattfarm[plratt.Value] and specstandfarm[plrstand.Value] then
                     notif("!!!","hit perfect stand and attribute!")
@@ -602,12 +591,10 @@ t1s2:NewToggle("autofarm stands (attributes)", "toggles to autofarm or not", fun
                 end
             elseif localplr.Backpack:FindFirstChild(roka) and plrstand.Value ~= "None" and not specattfarm[plratt.Value] then
                 local selroka = localplr.Backpack:FindFirstChild(roka) or localplr.Character:FindFirstChild(roka)
-                if not selroka:FindFirstChild("Use") then
-                    return
-                end
                 selroka.Parent = localplr.Character
-                selroka.Use:FireServer()
-                repeat wait() until selroka.Parent == nil
+                game.ReplicatedStorage.Events.UseItem:FireServer()
+                localplr.Data.Stand.Changed:Wait()
+                selroka.Parent = localplr.Backpack
                 wait(0.2)
                 if plrstand.Value == "PutridWhine" then
                     notif("you got putrid whine","cool thing")
@@ -628,12 +615,10 @@ t1s2:NewToggle("autofarm stands (attributes + charged)", "toggles to autofarm or
             local roka = "Rokakaka"
             if localplr.Backpack:FindFirstChild(arrow) and plrstand.Value == "None" then
                 local selarrow = localplr.Backpack:FindFirstChild(arrow) or localplr.Character:FindFirstChild(arrow)
-                if not selarrow:FindFirstChild("Use") then
-                    return
-                end
                 selarrow.Parent = localplr.Character
-                selarrow.Use:FireServer()
-                repeat wait() until selarrow.Parent == nil
+                game.ReplicatedStorage.Events.UseItem:FireServer()
+                localplr.Data.Stand.Changed:Wait()
+                selarrow.Parent = localplr.Backpack
                 wait(0.2)
                 if specattfarm[plratt.Value] and specstandfarm[plrstand.Value] then
                     notif("!!!","hit perfect stand and attribute!")
@@ -646,12 +631,10 @@ t1s2:NewToggle("autofarm stands (attributes + charged)", "toggles to autofarm or
                 end
             elseif localplr.Backpack:FindFirstChild(roka) and plrstand.Value ~= "None" and not specattfarm[plratt.Value] then
                 local selroka = localplr.Backpack:FindFirstChild(roka) or localplr.Character:FindFirstChild(roka)
-                if not selroka:FindFirstChild("Use") then
-                    return
-                end
                 selroka.Parent = localplr.Character
-                selroka.Use:FireServer()
-                repeat wait() until selroka.Parent == nil
+                game.ReplicatedStorage.Events.UseItem:FireServer()
+                localplr.Data.Stand.Changed:Wait()
+                selroka.Parent = localplr.Backpack
                 wait(0.2)
                 if plrstand.Value == "PutridWhine" then
                     notif("you got putrid whine","cool thing")
