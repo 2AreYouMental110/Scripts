@@ -399,6 +399,12 @@ lib.maketextbox("How Much To Wait Until Text Disappears",dialoguetab,function(tx
     end
 end)
 
+lib.makebutton("Copy Dialogue",dialoguetab,function()
+    if dialoguesettings.text then
+        setclipboard(dialoguesettings.text)
+    end
+end)
+
 lib.makebutton("Clear Text",dialoguetab,function()
     dialoguesettings.text = ""
 end)
