@@ -363,7 +363,7 @@ lib.maketoggle("Add Spaces After Text",dialoguetab,function(bool)
 end)
 
 lib.makedropdown("Box Color",dialoguetab,{"Red","Blue","Yellow"},function(color)
-    local box = boxes[box]
+    local box = boxes[color]
     dialoguesettings.box = box
 end)
 
