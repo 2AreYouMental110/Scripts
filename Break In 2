@@ -103,15 +103,17 @@ gameMeta.__index, gameMeta.__namecall = newcclosure(function(self, index, ...)
 end)
 --------------https://v3rmillion.net/showthread.php?tid=1090447---------
 function dobadguy(badguy)
-    if not badguy then return nil end
-    repeat
-        wait()
-        game.ReplicatedStorage.Events.HitBadguy:FireServer(badguy,10)
-        game.ReplicatedStorage.Events.HitBadguy:FireServer(badguy,996)
-        game.ReplicatedStorage.Events.HitBadguy:FireServer(badguy,9)
-        game.ReplicatedStorage.Events.HitBadguy:FireServer(badguy,8)
-        game.ReplicatedStorage.Events.HitBadguy:FireServer(badguy,996)
-    until not badguy or not badguy.Parent
+    task.spawn(function()
+        if not badguy then return nil end
+        repeat
+            wait()
+            game.ReplicatedStorage.Events.HitBadguy:FireServer(badguy,10)
+            game.ReplicatedStorage.Events.HitBadguy:FireServer(badguy,996)
+            game.ReplicatedStorage.Events.HitBadguy:FireServer(badguy,9)
+            game.ReplicatedStorage.Events.HitBadguy:FireServer(badguy,8)
+            game.ReplicatedStorage.Events.HitBadguy:FireServer(badguy,996)
+        until not badguy or not badguy.Parent
+    end)
 end
 
 lib.makebutton("Unlock Secret Ending",maintab,function()
@@ -254,6 +256,7 @@ for i,v in pairs(workspace:GetChildren()) do
         end))
     end
 end
+
 if workspace:FindFirstChild("PizzaBossAlec") then
     dobadguy(workspace.PizzaBossAlec:FindFirstChild("BadGuyPizza"))
 end
@@ -263,7 +266,6 @@ table.insert(toc,workspace.ChildAdded:Connect(function(badguy)
         dobadguy(badguy)
     end
 end))
-
 
 lib.makebutton("Get Hacker Role",lobbytab,function()
     game:GetService("ReplicatedStorage").RemoteEvents.OutsideRole:FireServer("Phone",true,false)
