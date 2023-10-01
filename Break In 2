@@ -373,8 +373,8 @@ end)
 
 local dialoguefontbox = lib.maketextbox("Font (but you type it)",dialoguetab,function(txt)
     for i,v in pairs(Enum.Font:GetEnumItems()) do
-        if v == txt then
-            dialoguesettings.font = v
+        if v.Name == txt then
+            dialoguesettings.font = v.Name
         end
     end
 end)
