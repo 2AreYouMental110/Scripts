@@ -4,12 +4,68 @@ local localplr = game.Players.LocalPlayer
 local localname = localplr.Name
 local killbadguys = false
 local energynochange = false
+local addspaces = false
 local toc = {}
+local dialoguebox = game:GetService("Players").LocalPlayer.PlayerGui.DialogueHolder.Dialogue.Dialogue.Dialogue
+local boxes = {}
+boxes["Red"] = "http://www.roblox.com/asset/?id=4614567084"
+boxes["Blue"] = "rbxassetid://3174861400"
+boxes["Yellow"] = "http://www.roblox.com/asset/?id=4691689807"
+local textanimmodule = require(game:GetService("Players").LocalPlayer.PlayerScripts.RichText)
+local dialogueopen = game:GetService("TweenService"):Create(dialoguebox, TweenInfo.new(0.4), {
+    Size = dialoguebox.Size, ImageTransparency = 0
+})
+local dialogueclose = game:GetService("TweenService"):Create(dialoguebox, TweenInfo.new(0.4), {
+    ImageTransparency = 1
+})
+function openframe(box)
+    if box then
+        dialoguebox.Image = box
+    end
+    dialoguebox.Size = UDim2.new(0.4, 0, 0.1, 0)
+    dialoguebox.ImageTransparency = 1
+    dialoguebox.Visible = true
+    dialogueopen:Play()
+    wait(dialogueopen.TweenInfo.Time)
+end
+function closeframe()
+    dialogueclose:Play()
+    for i,v in pairs(dialoguebox.TextFrame:GetDescendants()) do
+        if v:IsA("TextLabel") then
+            v.Visible = false
+        end
+    end
+    wait(dialogueclose.TweenInfo.Time)
+end
+function dodialogue(dialoguesettings)
+    local text = dialoguesettings.text
+    local font = dialoguesettings.font
+    local timebeforeclose = dialoguesettings.timebeforeclose
+    local box = dialoguesettings.box
+    if not font then
+        font = "GothamBold"
+    end
+    if not timebeforeclose then
+        timebeforeclose = 1
+    end
+    if not box then
+        box = boxes["Blue"]
+    end
+    openframe(box)
+    local textanim = textanimmodule:New(game:GetService("Players").LocalPlayer.PlayerGui.DialogueHolder.Dialogue.Dialogue.Dialogue.TextFrame,text,{
+        Font = font
+    })
+    textanim:Animate(true)
+    wait(timebeforeclose)
+    closeframe()
+end
+local dialoguesettings = {}
 
 local lib = loadstring(game:HttpGet("https://pastebin.com/raw/A2Wf3WVh"))()
 lib.makelib("Break In 2 (BY 2AREYOUMENTAL110)")
 local maintab = lib.maketab("Main")
 local lobbytab = lib.maketab("Lobby")
+local dialoguetab = lib.maketab("Dialogue (only you can see)")
 
 lib.ondestroyedfunc = function()
     killbadguys = false
@@ -78,28 +134,40 @@ end)
 
 lib.makebutton("Get Dream Team",maintab,function()
     -- uncle pete
-    for i,v in pairs(localplr.Character:GetChildren()) do
-        if v:IsA("Tool") then
-            v.Parent = localplr.Backpack
+    if workspace.TheHouse.Jail:FindFirstChild("Import6") then
+        for i,v in pairs(localplr.Character:GetChildren()) do
+            if v:IsA("Tool") then
+                v.Parent = localplr.Backpack
+            end
         end
+        game.ReplicatedStorage.Events.GiveTool:FireServer("Key")
+        local key = localplr.Backpack:WaitForChild("Key",math.huge)
+        key.Parent = localplr.Character
+        game.ReplicatedStorage.Events.KeyEvent:FireServer()
     end
-    game.ReplicatedStorage.Events.GiveTool:FireServer("Key")
-    local key = localplr.Backpack:WaitForChild("Key",math.huge)
-    key.Parent = localplr.Character
-    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("KeyEvent"):FireServer()
     -- twado
-    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("CatFed"):FireServer(game:GetService("Players").LocalPlayer.PlayerGui.Phone.Phone.Phone.Background.InfoScreen.DogInfo.TwadoWants.Text)
-    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("CatUpdate"):FireServer(CFrame.new(-196.73828125, 26.994741439819336, -790.2998657226562, 0.05909018963575363, 0, 0.9982526302337646, 0, 1, 0, -0.9982526302337646, 0, 0.05909018963575363))
-    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("GoingInside"):FireServer()
+    if workspace.TheHouse.SmallCat.Head.BillboardGui.Enabled == false then
+        game.ReplicatedStorage.Events.CatFed:FireServer(game:GetService("Players").LocalPlayer.PlayerGui.Phone.Phone.Phone.Background.InfoScreen.DogInfo.TwadoWants.Text)
+        game.ReplicatedStorage.Events.CatUpdate:FireServer(CFrame.new(-196.73828125, 26.994741439819336, -790.2998657226562, 0.05909018963575363, 0, 0.9982526302337646, 0, 1, 0, -0.9982526302337646, 0, 0.05909018963575363))
+        game.ReplicatedStorage.Events.GoingInside:FireServer()
+    end
     -- detective bradley
-    game.ReplicatedStorage.Events.GiveTool:FireServer("Louise")
-    local rat = localplr.Backpack:WaitForChild("Louise",math.huge)
-    rat.Parent = localplr.Character
-    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("LouiseGive"):FireServer(2)
+    if workspace.AgentBeans.Head:FindFirstChild("sleepingParticle") then
+        game.ReplicatedStorage.Events.GiveTool:FireServer("Louise")
+        local rat = localplr.Backpack:WaitForChild("Louise",math.huge)
+        rat.Parent = localplr.Character
+        game.ReplicatedStorage.Events.LouiseGive:FireServer(2)
+    end
 end)
 
 lib.makebutton("Avoid Humiliation Badge",maintab,function()
-    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AvoidHumiliation"):FireServer()
+    game.ReplicatedStorage.Events.AvoidHumiliation:FireServer()
+end)
+
+lib.makebutton("Reformed Badge",maintab,function()
+    game.ReplicatedStorage.Events.PunchableQuest:FireServer("Quest","GoldPizza")
+    game.ReplicatedStorage.Events.LarryEndingEvent:FireServer("HatCollected",true)
+
 end)
 
 lib.makelabel("Food",maintab)
@@ -203,4 +271,138 @@ end)
 
 lib.makebutton("Get Nerd Role",lobbytab,function()
     game:GetService("ReplicatedStorage").RemoteEvents.OutsideRole:FireServer("Book",true,false)
+end)
+
+function docolor(color)
+    local dialoguetoggle
+    dialoguetoggle = lib.maketoggle(color.." Color",dialoguetab,function(bool)
+        if bool then
+            dialoguetoggle.BackgroundColor3 = Color3.fromRGB(0,255,0)
+            if dialoguesettings.text then
+                dialoguesettings.text = dialoguesettings.text.."<Color="..color..">"
+            else
+                dialoguesettings.text = "<Color="..color..">"
+            end
+        else
+            dialoguetoggle.BackgroundColor3 = Color3.fromRGB(255,0,0)
+            if dialoguesettings.text then
+                dialoguesettings.text = dialoguesettings.text.."<Color=/>"
+            else
+                dialoguesettings.text = "<Color=/>"
+            end
+        end
+    end)
+    dialoguetoggle.BackgroundTransparency = 0.5
+    dialoguetoggle.BackgroundColor3 = Color3.fromRGB(255,0,0)
+end
+
+function doanimstyle(animstyle)
+    local dialoguetoggle
+    dialoguetoggle = lib.maketoggle(animstyle.." Animate Style",dialoguetab,function(bool)
+        if bool then
+            dialoguetoggle.BackgroundColor3 = Color3.fromRGB(0,255,0)
+            if dialoguesettings.text then
+                dialoguesettings.text = dialoguesettings.text.."<AnimateStyle="..animstyle..">"
+            else
+                dialoguesettings.text = "<AnimateStyle="..animstyle..">"
+            end
+        else
+            dialoguetoggle.BackgroundColor3 = Color3.fromRGB(255,0,0)
+            if dialoguesettings.text then
+                dialoguesettings.text = dialoguesettings.text.."<AnimateStyle=/>"
+            else
+                dialoguesettings.text = "<AnimateStyle=/>"
+            end
+        end
+    end)
+    dialoguetoggle.BackgroundTransparency = 0.5
+    dialoguetoggle.BackgroundColor3 = Color3.fromRGB(255,0,0)
+end
+
+lib.makelabel("Colors",dialoguetab)
+
+docolor("Red")
+docolor("Green")
+docolor("Yellow")
+docolor("Blue")
+docolor("Blue2")
+
+lib.makelabel("Animate Styles",dialoguetab)
+
+doanimstyle("Rainbow")
+doanimstyle("Wiggle")
+doanimstyle("Swing")
+doanimstyle("Spin")
+
+lib.makelabel("Dialogue And Text",dialoguetab)
+
+lib.maketextbox("Dialogue Text",dialoguetab,function(text)
+    if addspaces then
+        text = text.." "
+    end
+    if dialoguesettings.text then
+        dialoguesettings.text = dialoguesettings.text..text
+    else
+        dialoguesettings.text = text
+    end
+end)
+
+lib.maketextbox("How Much To Wait Until Text Continues",dialoguetab,function(txt)
+    local num = tonumber(txt)
+    if num then
+        if dialoguesettings.text then
+            dialoguesettings.text = dialoguesettings.text.."<AnimateYield="..txt..">"
+        else
+            dialoguesettings.text = "<AnimateYield="..txt..">"
+        end
+    end
+end)
+
+lib.maketoggle("Add Spaces After Text",dialoguetab,function(bool)
+    addspaces = bool
+end)
+
+lib.makedropdown("Box Color",dialoguetab,{"Red","Blue","Yellow"},function(color)
+    local box = boxes[box]
+    dialoguesettings.box = box
+end)
+
+lib.makedropdown("Font",dialoguetab,{"GothamBold","Garamond"},function(font)
+    dialoguesettings.font = font
+end)
+
+local dialoguefontbox = lib.maketextbox("Font (but you type it)",dialoguetab,function(txt)
+    for i,v in pairs(Enum.Font:GetEnumItems()) do
+        if v == txt then
+            dialoguesettings.font = v
+        end
+    end
+end)
+table.insert(toc,dialoguefontbox.Changed:Connect(function()
+    local txt = dialoguefontbox.Text
+    local found = false
+    for i,v in pairs(Enum.Font:GetEnumItems()) do
+        if v.Name == txt then
+            dialoguefontbox.Font = v
+            found = true
+        end
+    end
+    if not found then
+        dialoguefontbox.Font = Enum.Font.Arial
+    end
+end))
+
+lib.maketextbox("How Much To Wait Until Text Disappears",dialoguetab,function(txt)
+    num = tonumber(txt)
+    if num then
+        dialoguesettings.timebeforeclose = num
+    end
+end)
+
+lib.makebutton("Clear Text",dialoguetab,function()
+    dialoguesettings.text = ""
+end)
+
+lib.makebutton("Do Dialogue",dialoguetab,function()
+    dodialogue(dialoguesettings)
 end)
