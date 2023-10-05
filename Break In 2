@@ -5,6 +5,9 @@ local localname = localplr.Name
 local killbadguys = false
 local energynochange = false
 local addspaces = false
+local rainbow = false
+local color
+local t = 10
 local toc = {}
 local dialoguebox = game:GetService("Players").LocalPlayer.PlayerGui.DialogueHolder.Dialogue.Dialogue.Dialogue
 local boxes = {}
@@ -60,16 +63,22 @@ function dodialogue(dialoguesettings)
     closeframe()
 end
 local dialoguesettings = {}
+local rainbowify2 = Instance.new("ColorCorrectionEffect",game.Lighting)
+rainbowify2.Enabled = false
+rainbowify2.Name = "rainbowlol"
 
 local lib = loadstring(game:HttpGet("https://pastebin.com/raw/A2Wf3WVh"))()
 lib.makelib("Break In 2 (BY 2AREYOUMENTAL110)")
 local maintab = lib.maketab("Main")
 local lobbytab = lib.maketab("Lobby")
 local dialoguetab = lib.maketab("Dialogue (only you can see)")
+local cutscenetab = lib.maketab("Cutscene (only you can see)")
 
 lib.ondestroyedfunc = function()
     killbadguys = false
     energynochange = false
+    rainbowify2:Destroy()
+    rainbow = false
     for i,v in pairs(toc) do
         v:Disconnect()
     end
@@ -115,6 +124,24 @@ function dobadguy(badguy)
         until not badguy or not badguy.Parent
     end)
 end
+
+lib.maketextbox("Rainbowness (more lower = faster)",maintab,function(txt)
+    local num = tonumber(txt)
+    if num then
+        t = num
+    end
+end)
+local rainbowtoggle = lib.maketoggle("Rainbowify",maintab,function(bool)
+    rainbow = bool
+    if not bool then
+        lib.updateallcolors_secret(lib.bgcolor)
+    end
+end)
+rainbowtoggle.TextStrokeTransparency = 0
+local rainbowtoggle2 = lib.maketoggle("Rainbowify (2)",maintab,function(bool)
+    rainbowify2.Enabled = bool
+end)
+rainbowtoggle2.TextStrokeTransparency = 0
 
 lib.makebutton("Unlock Secret Ending",maintab,function()
     game.ReplicatedStorage.Events.LarryEndingEvent:FireServer("CrowbarCollected")
@@ -230,6 +257,10 @@ lib.makebutton("Get Phone",maintab,function()
     game.ReplicatedStorage.Events.GiveTool:FireServer("Phone")
 end)
 
+lib.makebutton("Get Book",maintab,function()
+    game.ReplicatedStorage.Events.GiveTool:FireServer("Book")
+end)
+
 lib.makebutton("Get Ladder",maintab,function()
     game.ReplicatedStorage.Events.GiveTool:FireServer("Ladder")
 end)
@@ -293,7 +324,7 @@ function docolor(color)
                 dialoguesettings.text = "<Color=/>"
             end
         end
-    end)
+    end,true)
     dialoguetoggle.BackgroundTransparency = 0.5
     dialoguetoggle.BackgroundColor3 = Color3.fromRGB(255,0,0)
 end
@@ -316,7 +347,7 @@ function doanimstyle(animstyle)
                 dialoguesettings.text = "<AnimateStyle=/>"
             end
         end
-    end)
+    end,true)
     dialoguetoggle.BackgroundTransparency = 0.5
     dialoguetoggle.BackgroundColor3 = Color3.fromRGB(255,0,0)
 end
@@ -414,3 +445,14 @@ end)
 lib.makebutton("Do Dialogue",dialoguetab,function()
     dodialogue(dialoguesettings)
 end)
+table.insert(toc,game:GetService("RunService").RenderStepped:Connect(function()
+    color = Color3.fromHSV(tick() % t/t,1,1)
+    rainbowtoggle.TextColor3 = color
+    rainbowtoggle2.TextColor3 = color
+    rainbowify2.TintColor = color
+    if rainbow then
+        rainbowtoggle.TextColor3 = Color3.fromHSV(1-tick() % t/t,1,1)
+        rainbowtoggle2.TextColor3 = Color3.fromHSV(1-tick() % t/t,1,1)
+        lib.updateallcolors_secret(color)
+    end
+end))
