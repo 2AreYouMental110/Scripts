@@ -116,11 +116,13 @@ function dobadguy(badguy)
         if not badguy then return nil end
         repeat
             wait()
-            game.ReplicatedStorage.Events.HitBadguy:FireServer(badguy,10)
-            game.ReplicatedStorage.Events.HitBadguy:FireServer(badguy,996)
-            game.ReplicatedStorage.Events.HitBadguy:FireServer(badguy,9)
-            game.ReplicatedStorage.Events.HitBadguy:FireServer(badguy,8)
-            game.ReplicatedStorage.Events.HitBadguy:FireServer(badguy,996)
+            if killbadguys then
+                game.ReplicatedStorage.Events.HitBadguy:FireServer(badguy,10)
+                game.ReplicatedStorage.Events.HitBadguy:FireServer(badguy,996)
+                game.ReplicatedStorage.Events.HitBadguy:FireServer(badguy,9)
+                game.ReplicatedStorage.Events.HitBadguy:FireServer(badguy,8)
+                game.ReplicatedStorage.Events.HitBadguy:FireServer(badguy,996)
+            end
         until not badguy or not badguy.Parent
     end)
 end
@@ -142,6 +144,10 @@ local rainbowtoggle2 = lib.maketoggle("Rainbowify (2)",maintab,function(bool)
     rainbowify2.Enabled = bool
 end)
 rainbowtoggle2.TextStrokeTransparency = 0
+
+lib.makebutton("Unlock Evil Ending (CLICK WHEN BRUTE HAS CROWBAR OUT, AND YOU NEED DREAM TEAM)",maintab,function()
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("YieldBruteCutscene"):FireServer()
+end)
 
 lib.makebutton("Unlock Secret Ending",maintab,function()
     game.ReplicatedStorage.Events.LarryEndingEvent:FireServer("CrowbarCollected")
