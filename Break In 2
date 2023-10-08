@@ -70,7 +70,7 @@ rainbowify2.Name = "rainbowlol"
 
 local tpservice = game:GetService("TeleportService")
 local tphook,tphook2
-tphook = hookfunction(tpservice.TeleportToPlaceInstance,newcclosure(function(...)
+tphook = hookfunction(tpservice.TeleportToPlaceInstance,newcclosure(function(placeid)
     print("hookfunction detected tpplace")
     if antitp then
         if localplr.Character then
@@ -80,10 +80,11 @@ tphook = hookfunction(tpservice.TeleportToPlaceInstance,newcclosure(function(...
         return nil
     else
         print("uhm its tping you might leave")
-        return tphook(...)
+        print(placeid)
+        tphook(service,placeid)
     end
 end))
-tphook2 = hookfunction(tpservice.Teleport,newcclosure(function(event,...)
+tphook2 = hookfunction(tpservice.Teleport,newcclosure(function(service,placeid)
     print("hookfunction detected tp")
     if antitp then
         if localplr.Character then
@@ -93,7 +94,8 @@ tphook2 = hookfunction(tpservice.Teleport,newcclosure(function(event,...)
         return nil
     else
         print("uhm its tping you might leave")
-        return tphook2(...)
+        print(placeid)
+        tphook2(service,placeid)
     end
 end))
 
