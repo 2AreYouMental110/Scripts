@@ -72,6 +72,9 @@ local tpservice = game:GetService("TeleportService")
 local tphook,tphook2
 tphook = hookfunction(tpservice.TeleportToPlaceInstance,newcclosure(function(placeid)
     print("hookfunction detected tpplace")
+    for i,v in pairs(workspace.BadGuyBounds:GetChildren()) do
+        v.CanCollide = false
+    end
     if antitp then
         if localplr.Character then
             localplr.Character:PivotTo(game.Players:GetPlayers()[math.random(1,#game.Players:GetPlayers())].Character:GetPivot())
@@ -86,6 +89,9 @@ tphook = hookfunction(tpservice.TeleportToPlaceInstance,newcclosure(function(pla
 end))
 tphook2 = hookfunction(tpservice.Teleport,newcclosure(function(service,placeid)
     print("hookfunction detected tp")
+    for i,v in pairs(workspace.BadGuyBounds:GetChildren()) do
+        v.CanCollide = false
+    end
     if antitp then
         if localplr.Character then
             localplr.Character:PivotTo(game.Players:GetPlayers()[math.random(1,#game.Players:GetPlayers())].Character:GetPivot())
