@@ -7,6 +7,7 @@ local weaponsizes = {}
 local supportgetgenv = false
 local disinf = true
 local inf = true
+local disablegp = false
 local sad = true
 local ragdoll = true
 local antigrab = false
@@ -15,7 +16,7 @@ local getkeys = false
 local instakillinfect = false
 local killgateswitcher = nil
 local cooldown = nil
-local weaponsscale = nil
+local weaponsscale,weaponsscale2 = nil
 local success,err = pcall(function()
     if typeof(getgenv()) == "table" then
         supportgetgenv = true
@@ -570,31 +571,51 @@ table.insert(tableofconnections,cooldowntextbox.FocusLost:Connect(function()
 end))
 
 local function dotool(tool)
-    if (tool.Parent == game.Players.LocalPlayer or game.Players:GetPlayerFromCharacter(tool.Parent) == game.Players.LocalPlayer) and tool:IsA("Tool") and weaponsscale and tool:FindFirstChild("Cooldown") then
+    if (tool.Parent == game.Players.LocalPlayer or game.Players:GetPlayerFromCharacter(tool.Parent) == game.Players.LocalPlayer) and tool:IsA("Tool") and (weaponsscale or weaponsscale2) and tool:FindFirstChild("Cooldown") then
         if tool:FindFirstChild("Hitbox") or tool:FindFirstChild("HitBox") then
             local part = tool:FindFirstChild("Hitbox") or tool:FindFirstChild("HitBox")
             if not weaponsizes[tool.Name] then
                 weaponsizes[tool.Name] = part.Size
             end
             part.Transparency = .5
-            part.Size = weaponsizes[tool.Name] * weaponsscale
+            if weaponsscale2 then
+                part.Size = weaponsscale2
+            end
+            if weaponsscale then
+                part.Size = weaponsizes[tool.Name] * weaponsscale
+            end
         elseif tool:FindFirstChild("BodyAttach") then
             if not weaponsizes[tool.Name] then
                 weaponsizes[tool.Name] = tool.BodyAttach.Size
             end
-            tool.BodyAttach.Size = weaponsizes[tool.Name] * weaponsscale
+            if weaponsscale2 then
+                tool.BodyAttach.Size = weaponsscale2
+            end
+            if weaponsscale then
+                tool.BodyAttach.Size = weaponsizes[tool.Name] * weaponsscale
+            end
         elseif tool.Name == "Handle" then
             if not weaponsizes[tool.Name] then
                 weaponsizes[tool.Name] = tool.Handle.Size
             end
-            tool.Handle.Size = weaponsizes[tool.Name] * weaponsscale
+            if weaponsscale2 then
+                tool.Handle.Size = weaponsscale2
+            end
+            if weaponsscale then
+                tool.Handle.Size = weaponsizes[tool.Name] * weaponsscale
+            end
         elseif tool:FindFirstChildWhichIsA("BasePart") then
             local part = tool:FindFirstChildWhichIsA("BasePart")
             if part then
                 if not weaponsizes[tool.Name] then
                     weaponsizes[tool.Name] = part.Size
                 end
-                part.Size = weaponsizes[tool.Name] * weaponsscale
+                if weaponsscale2 then
+                    part.Size = weaponsscale2
+                end
+                if weaponsscale then
+                    part.Size = weaponsizes[tool.Name] * weaponsscale
+                end
             end
         end
     end
@@ -636,6 +657,56 @@ table.insert(tableofconnections,instakillinfectbutton.MouseButton1Click:Connect(
     else
         instakillinfectbutton.Text = "Instant Kill When Infecting (KILLS YOU ALSO): OFF"
         game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+    end
+end))
+
+local disablegamepassbutton = Instance.new("TextButton")
+disablegamepassbutton.Size = UDim2.new(.2,0,.2,0)
+disablegamepassbutton.Position = UDim2.new(.4,0,.45,0)
+disablegamepassbutton.Text = "Disable Gamepass Button: OFF"
+disablegamepassbutton.TextScaled = true
+disablegamepassbutton.TextColor3 = Color3.fromRGB(255,255,255)
+disablegamepassbutton.BackgroundColor3 = Color3.fromRGB(50,50,50)
+disablegamepassbutton.BorderColor3 = Color3.fromRGB(255,255,255)
+disablegamepassbutton.Parent = extrasection
+table.insert(tableofconnections,disablegamepassbutton.MouseButton1Click:Connect(function()
+    disablegp = not disablegp
+    if disablegp then
+        disablegamepassbutton.Text = "Disable Gamepass Button: ON"
+        workspace.Map.HumanBase.Gamepasses.Button.CanTouch = false
+    else
+        disablegamepassbutton.Text = "Disable Gamepass Button: OFF"
+        workspace.Map.HumanBase.Gamepasses.Button.CanTouch = true
+    end
+end))
+
+local scaleweapons2button = Instance.new("TextBox")
+scaleweapons2button.Size = UDim2.new(.2,0,.2,0)
+scaleweapons2button.Position = UDim2.new(.7,0,.45,0)
+scaleweapons2button.Text = ""
+scaleweapons2button.PlaceholderText = "Scale for weapons here (xyz)"
+scaleweapons2button.TextScaled = true
+scaleweapons2button.TextColor3 = Color3.fromRGB(255,255,255)
+scaleweapons2button.BackgroundColor3 = Color3.fromRGB(50,50,50)
+scaleweapons2button.BorderColor3 = Color3.fromRGB(255,255,255)
+scaleweapons2button.Parent = extrasection
+table.insert(tableofconnections,scaleweapons2button.FocusLost:Connect(function()
+    local txt = scaleweapons2button.Text
+    local xyz = nil
+    if string.find(txt,",") then
+        xyz = string.split(txt,",")
+    elseif string.find(txt," ") then
+        xyz = string.split(txt," ")
+    end
+    if xyz then
+        for i,v in pairs(xyz) do v = tonumber(v) end
+        weaponsscale2 = Vector3.new(table.unpack(xyz))
+        for i,tool in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+            dotool(tool)
+        end
+        for i,tool in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+            dotool(tool)
+        end
     end
 end))
 
